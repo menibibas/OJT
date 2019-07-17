@@ -1,4 +1,48 @@
-<<<<<<< HEAD
-=======
+<div id="wrapper">
+    <header></header>
+    <div id="page-wrapper">
+        <h2 class="page-title">עריכת משתתפים בשיעור {{lessonNum}}</h2>
+        <form>
+            <div>
+                <input type="text" class="form-input search-bar" placeholder="חיפוש חניך"
+                    ng-model="query" >
+                <div class="clickable search-button"><i class="fa fa-search" aria-hidden="true"
+                        ng-click="student.attendanceStatus(status)"></i>
+                </div>
+            </div>
+            <div>
+                <div class="scrolling-table-wrapper">
+                    <div class="scrolling-table">
+                        <table class="table-striped table-bordered table-hover midrows">
+                            <thead>
+                                <tr>
+                                    <th class="small-cell">שם פרטי</th>
+                                    <th class="small-cell">שם משפחה</th>
+                                    <th class="large-cell">סטטוס נוכחות</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="student in stundentsAttandance | filter : filterStudent">
+                                    <td class="small-cell">{{student.firstname}}</td>
+                                    <td class="small-cell">{{student.lastname}}</td>
 
->>>>>>> 11e8edb05cdb7a54feaccc1ecc797bb7e69c4c5b
+                                    <td class="large-cell">
+                                        <select ng-model="student.attendanceStatus"
+                                            ng-options="attendanceStatus.value as attendanceStatus.name for attendanceStatus in AttendanceStatusesTags"
+                                            ng-change="UpdateAttendeeStatus(student)">
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="lesson-nav-options">
+            <button class="button" ng-click="backSingleCourse()" type="button">
+                <span class="text">חזרה{{dictionary.backCourseText}}</span>
+            </button>
+        </div>
+    </div>
+</div>
