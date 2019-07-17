@@ -219,7 +219,41 @@ on-confirm="deleteSecondTeacher()"
 		   <div excel-export file-name = "{{course.name}}_{{role.enrollmentrole}}" get-data = "getEnrolledUsersInRoleFull" param-obj = "{'param1':  role}" make-header="false" ng-show="displayedEnrollments[role.enrollmentroleid].users.length>0"></div>
 		   <hr>
 	   </div>
+<!--my table-->
+<div ng-if="isAdmin">
+	<h5>lesson section</h5>
+	
+	<div class="scrolling-table-wrapper">
+		<div class="scrolling-table clickable">
+			<table class="table-striped table-bordered table-hover midrows">
+				<thead>
+					<tr>
+						<th sorter-table-header field-index="'code'" field-text="'מספר שיעור'"
+							sort-by-field="sortBy" sorting-field="sortingField" reverse-order="reverseOrder"
+							class="small-cell"></th>
+						<th sorter-table-header field-index="'name'" field-text="'תאריך'"
+							sort-by-field="sortBy" sorting-field="sortingField" reverse-order="reverseOrder"
+							class="small-cell"></th>
+						<th sorter-table-header field-index="'subname'" field-text="'שעה'"
+							sort-by-field="sortBy" sorting-field="sortingField" reverse-order="reverseOrder"
+							class="small-cell"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr style="cursor:pointer" ng-click="goToLessonPage(lesson)"
+						ng-repeat="lesson in lessons | orderBy:sortType:sortReverse">
+						<td class="small-cell" title="{{lesson.num}}">{{lesson.num}}</td>
+						<td class="small-cell" title="{{lesson.beginningdate}}">{{lesson.beginningdate | date: 'dd/MM/yyyy'}}</td>
+						<td class="small-cell" title="{{lesson.beginningdate}}">{{lesson.beginningdate | date : 'HH:MM'}}</td>
+				
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
+</div>
+	<!--/my table-->
 	 
    </div>
    <div ng-if="!courseid">

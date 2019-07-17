@@ -233,7 +233,35 @@ function($rootScope, $scope, $state, $stateParams, $http, $q, userService, Uploa
     //         $scope.TeachersEnrollmentTags = data;
     //         console.log($scope.TeachersEnrollmentTags);
     //     });
-    // }
+	// }
+	
+	$scope.lessons =[];
+	function GetLessonsOfCourse() {
+	var data = {};
+	data.courseid = $scope.courseid;
+	data.type = "post";
+	server.requestPhp(data, "GetLessonsOfCourse").then(function(data) {
+			$scope.lessons = data;
+			console.log($scope.lessons);
+	});
+	}
+	GetLessonsOfCourse();
+
+	$scope.goToLessonPage = function(lesson){
+		if($rootScope.isAdmin){
+			$state.transitionTo("singleLesson", {
+				lessonId:lesson.lessonid,
+				lessonNum:lesson.num,
+				courseId:$scope.courseid
+			});
+		}
+	}
+
+	
+	
+	
+
+
 
     $scope.StudentsEnrollmentTags = [];
 
@@ -244,6 +272,7 @@ function($rootScope, $scope, $state, $stateParams, $http, $q, userService, Uploa
             console.log($scope.StudentsEnrollmentTags);
         });
     }
+	
 
    // GetEnrollmentTagsForTeachers();
 
